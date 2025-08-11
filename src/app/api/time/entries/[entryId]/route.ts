@@ -67,7 +67,7 @@ export async function PATCH(
     }
 
     // Prepare update data
-    const updateData: any = {};
+    const updateData: Partial<typeof timeEntries.$inferInsert> = {};
     if (updates.projectId !== undefined) updateData.projectId = updates.projectId;
     if (updates.taskId !== undefined) updateData.taskId = updates.taskId;
     if (updates.minutes !== undefined) updateData.minutes = updates.minutes;

@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const projectId = searchParams.get("projectId");
 
     // Get all active projects for the organization
-    let projectsQuery = db.query.projects.findMany({
+    const projectsQuery = db.query.projects.findMany({
       where: and(
         eq(projects.orgId, session.user.orgId),
         eq(projects.status, "active"),

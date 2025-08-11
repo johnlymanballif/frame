@@ -3,14 +3,8 @@ import postgres from "postgres";
 import * as schema from "./schema";
 
 // Load environment variables if not already loaded
-if (!process.env.DATABASE_URL && process.env.NODE_ENV !== "production") {
-  try {
-    const { config } = require("dotenv");
-    config({ path: ".env.local" });
-  } catch (error) {
-    // Ignore if dotenv is not available
-  }
-}
+// Note: avoid require() in ESM TypeScript to satisfy eslint rule
+// Local development can load env via Next.js or a dev runner; Vercel provides env at runtime
 
 // Use environment variable for database connection
 const connectionString = process.env.DATABASE_URL!;

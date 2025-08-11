@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
     const userId = url.searchParams.get("userId");
 
     // Build query conditions
-    let whereConditions = [eq(timeEntries.orgId, session.user.orgId)];
+    const whereConditions = [eq(timeEntries.orgId, session.user.orgId)];
 
     if (startDate) {
       whereConditions.push(gte(timeEntries.startedAt, new Date(startDate)));

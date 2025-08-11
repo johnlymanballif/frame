@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Calculate summaries based on groupBy parameter
-    let summaries: any[] = [];
+    let summaries: Array<Record<string, unknown>> = [];
 
     if (groupBy === "project") {
       const projectSummaries = new Map();

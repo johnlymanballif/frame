@@ -47,7 +47,7 @@ export async function PATCH(
     }
 
     // Update the project
-    const updateData: any = {};
+    const updateData: Partial<Pick<typeof projects.$inferInsert, "budgetType" | "budgetValue" | "defaultBillRateCents">> = {} as any;
     if (updates.budgetType !== undefined) updateData.budgetType = updates.budgetType;
     if (updates.budgetValue !== undefined) updateData.budgetValue = updates.budgetValue;
     if (updates.defaultBillRateCents !== undefined) updateData.defaultBillRateCents = updates.defaultBillRateCents;

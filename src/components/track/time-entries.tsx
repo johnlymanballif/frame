@@ -76,8 +76,8 @@ export function TimeEntries() {
   const [data, setData] = useState<TimeEntriesData | null>(null);
   const [loading, setLoading] = useState(true);
   const [editingEntry, setEditingEntry] = useState<TimeEntry | null>(null);
-  const [projects, setProjects] = useState<any[]>([]);
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Array<{ id: number; name: string; client?: { name: string } }>>([]);
+  const [tasks, setTasks] = useState<Array<{ id: number; name: string }>>([]);
 
   // Load data when tab or date changes
   useEffect(() => {
@@ -139,7 +139,10 @@ export function TimeEntries() {
     }
   };
 
-  const handleUpdateEntry = async (entryId: number, updates: any) => {
+  const handleUpdateEntry = async (
+    entryId: number,
+    updates: { projectId: number; taskId: number | null; minutes: number | null; note: string | null; billable: boolean }
+  ) => {
     try {
       const response = await fetch(`/api/time/entries/${entryId}`, {
         method: "PATCH",

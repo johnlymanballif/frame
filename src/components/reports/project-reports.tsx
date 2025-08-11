@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// Tabs imported but not used previously; keep only what's used
 import { 
   Download, 
   RefreshCw, 
@@ -48,7 +48,18 @@ interface ReportData {
     nonBillableHours: number;
     entryCount: number;
   };
-  entries: any[];
+  entries: Array<{
+    id: number;
+    startedAt: string | Date;
+    endedAt: string | Date | null;
+    minutes: number | null;
+    hours: number;
+    note: string | null;
+    billable: boolean;
+    project: { id: number; name: string; client?: string };
+    user: { id: number; name: string };
+    task?: { id: number; name: string } | null;
+  }>;
   metadata: {
     totalEntries: number;
     dateRange: {
@@ -56,14 +67,14 @@ interface ReportData {
       end: Date;
     } | null;
     groupBy: string;
-    filters: any;
+    filters: Record<string, string>;
   };
 }
 
 export function ProjectReports() {
   const [reportData, setReportData] = useState<ReportData | null>(null);
-  const [projects, setProjects] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [projects, setProjects] = useState<Array<{ id: number; name: string }>>([]);
+  const [users, setUsers] = useState<Array<{ id: number; name: string }>>([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     startDate: "",

@@ -11,7 +11,7 @@ import { toast } from "sonner";
 interface NewProjectDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onProjectCreated: (project: any) => void;
+  onProjectCreated: (project: { id: number; name: string }) => void;
 }
 
 export function NewProjectDialog({ open, onOpenChange, onProjectCreated }: NewProjectDialogProps) {
@@ -33,7 +33,7 @@ export function NewProjectDialog({ open, onOpenChange, onProjectCreated }: NewPr
     setIsLoading(true);
 
     try {
-      const payload: any = {
+      const payload: Record<string, unknown> = {
         name: formData.name.trim(),
       };
 

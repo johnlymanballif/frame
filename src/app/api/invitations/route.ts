@@ -109,16 +109,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const user = await requireManagerAuth();
     
     // Get pending invitations for the organization
     const pendingInvitations = await db.query.invitations.findMany({
-      where: and(
-        eq(invitations.orgId, user.orgId),
-        eq(invitations.acceptedAt, null as any)
-      ),
+      where: and(eq(invitations.orgId, user.orgId), isNull(invitations.acceptedAt)),
       with: {
         invitedByUser: {
           columns: {

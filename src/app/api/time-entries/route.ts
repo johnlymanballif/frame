@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get("endDate");
     const projectId = searchParams.get("projectId");
 
-    let whereConditions = [eq(timeEntries.orgId, user.orgId)];
+    const whereConditions = [eq(timeEntries.orgId, user.orgId)];
 
     // Users can only see their own entries unless they're managers
     if (user.role === "member") {

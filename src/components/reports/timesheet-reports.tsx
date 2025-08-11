@@ -56,14 +56,14 @@ interface TimesheetData {
       start: string;
       end: string;
     } | null;
-    filters: any;
+    filters: Record<string, string>;
   };
 }
 
 export function TimeSheetReports() {
   const [timesheetData, setTimesheetData] = useState<TimesheetData | null>(null);
-  const [projects, setProjects] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [projects, setProjects] = useState<Array<{ id: number; name: string }>>([]);
+  const [users, setUsers] = useState<Array<{ id: number; name: string }>>([]);
   const [loading, setLoading] = useState(false);
   const [viewMode, setViewMode] = useState<"detailed" | "weekly" | "daily">("detailed");
   const [filters, setFilters] = useState({

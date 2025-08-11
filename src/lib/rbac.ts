@@ -117,7 +117,7 @@ ROLE_PERMISSIONS.owner = [
 
 export function hasPermission(user: User, permission: string): boolean {
   const userPermissions = ROLE_PERMISSIONS[user.role] || [];
-  return userPermissions.includes(permission as any);
+  return userPermissions.includes(permission as unknown as typeof PERMISSIONS[keyof typeof PERMISSIONS]);
 }
 
 export function canAccessResource(user: User, resourceOrgId: number): boolean {
