@@ -28,9 +28,10 @@ const splitEntrySchema = z.object({
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { entryId: string } }
+  context: any
 ) {
   try {
+    const { params } = context as { params: { entryId: string } };
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -113,9 +114,10 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { entryId: string } }
+  context: any
 ) {
   try {
+    const { params } = context as { params: { entryId: string } };
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
